@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const webpack = require("webpack");
 
 const createStyledComponentsTransformer =
     require("typescript-plugin-styled-components").default;
@@ -13,7 +14,7 @@ module.exports = () => {
         target: "web",
         mode: "development",
         output: {
-            filename: "[name].[hash].bundle.js",
+            filename: "[name].[contenthash].bundle.js",
             path: path.resolve(__dirname, "dist"),
         },
         resolve: {
@@ -54,7 +55,7 @@ module.exports = () => {
         plugins: [
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
-                title: "Spectrum App",
+                title: "Tumblr Tag Search",
                 template: __dirname + "/public/index.html",
                 inject: "body",
                 filename: "index.html",
@@ -62,6 +63,11 @@ module.exports = () => {
             new MiniCssExtractPlugin({
                 filename: "[name].css",
                 chunkFilename: "[id].css",
+            }),
+            new webpack.DefinePlugin({
+                TUMBLR_KEY: JSON.stringify(
+                    "TlH5wtt6RTo3JCd9F0K4YN7Xydql40GJFMPaROMELVdPAgMrxK",
+                ),
             }),
         ],
         devServer: {

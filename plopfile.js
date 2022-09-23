@@ -17,16 +17,6 @@ const componentGenerator = {
             path: "src/components/{{name}}/{{name}}.tsx",
             templateFile: "templates/component.hbs",
         },
-        {
-            type: "add",
-            path: "src/components/{{name}}/{{name}}.test.tsx",
-            templateFile: "templates/test.hbs",
-        },
-        {
-            type: "add",
-            path: "src/components/{{name}}/{{name}}.story.tsx",
-            templateFile: "templates/tsx-story.hbs",
-        },
     ],
 };
 
